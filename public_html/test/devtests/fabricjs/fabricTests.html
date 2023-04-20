@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../../vendor/simplePagination/simplePagination.css"/>
+
+    <script src="../../../vendor/underscore-1.8.3/underscore.js"></script>
+    <script src="../../../vendor/jQuery-1.11.3/jquery.min.js"></script>
+    <script src="../../../vendor/fabric.js/fabric.min.js"></script>
+    <script>
+
+      $(document).ready(function () {
+        var scanvas = new fabric.Canvas('c');
+        var img = new Image();
+        img.src = './img.jpg';
+        img.onload = function () {
+          var fabricImage = new fabric.Image(img);
+          fabricImage.scaleToWidth(1200);
+          fabricImage.scaleToHeight(800);
+          var fragmentImage = new Image();
+          fragmentImage.src = fabricImage.toDataURL({quality: 2.0, left: 0, top: 0, width: 800, height: 500});
+          fragmentImage.onload = function () {
+            var fabricfragmentImage = new fabric.Image(fragmentImage, {stroke: 'green', strokeWidth: 1, });
+            fabricfragmentImage.set('selectable', false);
+            scanvas.add(fabricfragmentImage);
+            scanvas.renderAll();
+          }
+
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <canvas id="c" width="2200" height="1600"></canvas>
+  </body>
+</html>

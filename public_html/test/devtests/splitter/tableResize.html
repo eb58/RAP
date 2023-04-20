@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../vendor/jQueryUI-1.11.0/jquery-ui.css">
+    <style>
+      table td {   border: 1px solid black;  border-collapse: collapse; }
+      #mainTable  { width: 100%; height:100%; }
+      #left       { width: 100%; height:100%;  }
+      #right      { width: 100%; height:100%;  }
+      #viewesv    { width:100%; height:100%; overflow: auto; border: 1px solid green; }
+      #viewpdf    { width:100%; height:100%; overflow: auto; border: 1px solid green; }
+      #viewwrk    { width:100%; height:1000px; overflow: auto; border: 1px solid green; }
+      .ui-resizable-handle { background-color: #aaabaa; }
+
+      #myCanvas1 { background-color: rgba(158, 167, 184, 0.2); }
+      #myCanvas2 { background-color: rgba(158, 167, 184, 0.2); }
+    </style>
+    <script src="../../../vendor/underscore-1.8.3/underscore.js"></script>
+    <script src="../../../vendor/jQuery-1.11.3/jquery.js"></script>
+    <script src="../../../vendor/jQueryUI-1.11.0/jquery-ui.js"></script>
+    <script>
+      $(document).ready(function () {
+        $('#mainTable>tbody>tr>td').slice(0, 1).resizable({
+          handles: 'e', minWidth: 100,
+          stop: function (evt, ui) {
+            console.log('XXX',ui.size);
+          }
+        });
+        $('#left td').slice(0, 1).resizable({
+          handles: 's', minHeight: 100,
+          stop: function (evt, ui) {
+            console.log( ui.size);
+            $('#viewesv').height(ui.size.height);
+          }
+
+        });
+        $('#mainTable').css('width', $(window).width() - 20);
+        $('#mainTable').css('height', $(window).height() - 20);
+      });
+    </script>    
+  </head>
+  <body>
+    <table id="mainTable">
+      <tr >
+        <td>
+          <table id="left">
+            <tr>
+              <td>
+                <div id="viewesv" style="overflow-y: auto; height:100px;">
+                  Fragment FragmentFragmen tFragmentFragment FragmentFragmentFragment
+                  FragmentFragmentFragment  FragmentFragmentFragment FragmentFragmentFragment
+                  FragmentFragment
+                  <canvas id="myCanvas1" width="800" height="600"></canvas>
+                </div>
+              </td></tr>
+            <tr>
+              <td>
+                <div id="viewpdf">Fragment FragmentFragmen tFragmentFragment FragmentFragmentFragment
+                  FragmentFragmentFragment  FragmentFragmentFragment FragmentFragmentFragment
+                  FragmentFragment
+                  <canvas id="myCanvas2" width="800" height="600"></canvas>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <div id="right">
+            <div id="viewwrk">WORK 
+            </div>          
+          </div>
+        </td>
+      </tr>
+    </table>  
+  </body>
+</html>

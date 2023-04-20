@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      #c {
+        background-color: bisque;
+      }
+    </style>
+
+    <link rel="stylesheet" href="../../../vendor/simplePagination/simplePagination.css"/>
+    <link rel="stylesheet" href="../../../vendor/jquery-contextmenu/jquery.contextMenu.min.css"/>
+
+    <script src="../../../vendor/underscore-1.8.3/underscore.min.js"></script>
+    <script src="../../../vendor/jQuery-1.11.3/jquery.min.js"></script>
+    <script src="../../../vendor/fabric.js/fabric.min.js"></script>
+    <script src="../../../js/utils/geom.js"></script>
+    <script src="../../../js/utils/utils.js"></script>
+    <script>
+      var canvas, el, startPos;
+      $(document).ready(function () {
+        canvas = new fabric.Canvas("c");
+        el = new fabric.Rect({left: 200, top: 5, width: 50, height: 100, opacity: 0.1, hasRotatingPoint: false, });
+        canvas.add(el);
+        canvas.renderAll();
+        canvas.setActiveObject(el);
+
+        canvas.on('mouse:down', function (event) {
+          console.log('mouse:down startPos:', startPos);
+          if (event.e.ctrlKey && !canvas.getActiveObject()) {
+            startPos = canvas.getPointer(event.e);
+          }
+        });
+        canvas.on('mouse:up', function (event) {
+          var endPos = canvas.getPointer(event.e);
+          console.log('mouse:up', endPos);
+
+          if (!startPos || geom.pointEqual(startPos, endPos))
+            return;
+
+          endPos.x = Math.max(0, Math.min(canvas.width, endPos.x));
+          endPos.y = Math.max(0, Math.min(canvas.height, endPos.y));
+
+          var r = geom.rectCreate(startPos, endPos);
+          var sz = geom.rectSizeOf([r[0], r[1]]);
+          var rect = new fabric.Rect(_.extend({top: r[0].y, left: r[0].x, width: sz.w, height: sz.h}));
+          if (rect) {
+            canvas.add(rect);
+            canvas.setActiveObject(rect);
+          }
+          startPos = null;
+        });
+
+        el.on('deselected', function (e) {
+          //el.setStroke("#000");
+        });
+        canvas.on('object:selected', function (e) {
+        });
+        canvas.on('object:moving', function (e) {
+          utils.restrictToCanvasWhenMoving(e.target);
+        });
+        canvas.on('object:scaling', function (e) {
+          utils.restrictToCanvasWhenScaling(e.target);
+        });
+        canvas.on('object:modified', function (e) {
+          utils.restrictToCanvasWhenMoving(e.target);
+          utils.restrictToCanvasWhenScaling(e.target);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <canvas id="c" width="300" height="300"></canvas>
+  </body>
+</html>

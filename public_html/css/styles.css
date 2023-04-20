@@ -1,0 +1,306 @@
+.simplelabel {
+  font-size: 14px;
+  font-weight: bold;
+  margin:5px 5px 5px 5px;
+  float:left;
+}
+
+/***************** styling the views *****************/
+
+#mainrap {
+  /* this line for debugging: padding: 10px; border: 3px solid greenyellow;*/
+  background: linear-gradient(#ccccbb, #f0f0e0);
+  border: 3px solid grey;
+  margin:5px;
+  height:88vh;
+  width:99vw;
+}
+
+#both-left {
+  /* this line for debugging: border: 1px solid red; */
+  float: left;
+  max-width: 85%; 
+  height: 100%;
+  overflow: hidden;  
+}
+
+/**************** viewesv ********************/
+#viewesv {
+  margin-right: 6px;
+}
+
+#viewesv #canvases{
+  max-width: 1185px; /* 1169 + 16 */
+}
+
+#viewesv .fragment{
+  padding: 1px; 
+  margin: 3px 2px 3px 0px; 
+  background-color: #acaabc; 
+}
+
+#viewesv .fragmentselected {
+  border: 1px solid #d52338; 
+}
+
+#viewesv .area {
+  margin: 4px;
+  border: 0px solid #f99;
+}
+
+/**************** viewpdf ********************/
+#viewpdf {
+  margin-right: 12px;
+}
+
+#viewpdf #contentpdf {
+  max-width: 1185px; /* 1169 + 16 */
+}
+
+/**************** viewwrk ********************/
+
+#viewwrk {
+  /* this line for debugging:  margin: 0px; border: 1px solid violet; */
+  height: 100%;
+  overflow-y: auto;
+}
+
+#viewwrk #fragtyp{
+  margin: 2px 5px 2px 5px; 
+  min-width:300px;
+}
+
+#viewwrk #viewtree{
+  /* this line for debugging: */ border: 3px solid lightgray;
+  float:left; 
+  margin: 2px 5px 2px 5px; 
+  min-width:300px;
+}
+
+#viewwrk #viewtree{
+  overflow-y:auto;
+  max-height: 86.5vh
+}
+
+#viewwrk #viewflds{
+  /* this line for debugging: */ /* border: 3px solid lightgray;*/
+  float:left; 
+  margin: 2px 5px 2px 5px;
+  min-width:300px;
+  background-color: #ececec;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 3px solid #d8d8d8;
+}
+
+
+#viewwrk #viewflds input[type=text], #viewwrk #viewflds select {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 2px 0;
+  border: 1px solid #040e52;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+#viewwrk #viewflds td {
+  padding-left: 10px;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+#viewwrk #viewflds tr:hover > td:first-child {
+  background-color: #b4cfff;
+  border: 1px solid #3f51b5
+}
+
+#viewwrk #viewflds tr {
+  border-bottom:  1px solid #040e52;
+  margin-left: 20px;
+  color: #1d2c80;
+}
+
+#viewwrk #viewflds .fa-calendar {
+  cursor: pointer;
+}
+
+/**************** sliders for resizing *****************/
+.ui-resizable-handle {
+  flex: 0 0 auto;
+  border: 0.5px solid black;
+}
+
+.ui-resizable-e {
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAhCAQAAABOpSL+AAAAIklEQVR4AWMwbb/PdR+JZDD9f1/oPhI5sgVGBSruc9xHIgGdSQqqQJGkRgAAAABJRU5ErkJggg==')center no-repeat #c1c1c1;
+  border-right: 6px solid black;
+  width:12px; 
+}
+
+.ui-resizable-s {
+  position: absolute;
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAICAQAAADdTl4aAAAAIElEQVQoz2MwrTD9TxFsZ7jPcV+IIsjFQAUw6hFqegQA+xzRHT2p7pEAAAAASUVORK5CYII=') center no-repeat #c1c1c1;
+  border: 0.5px solid black;
+  height: 12px;
+  bottom: 0px;
+}
+
+/***************** styling dropdowns *****************/
+#esvVorlageX, #blattbereichsauswahlX {
+  min-width: 130px;
+  height: 26px;
+  text-align: center;
+  background-color: #3F51B5;
+  color: white;
+  display: inline-block;
+  position: relative;
+  padding-left: 10px;
+  margin-right: .1em;
+  text-decoration: none !important;
+  cursor: pointer; 
+}
+
+#esvVorlageX option, #blattbereichsauswahlX option {
+  padding-bottom: 5px; 
+}
+
+#viewwrk input[list] {
+    cursor: text;
+}
+
+#viewwrk td .fa-caret-down {
+    cursor: pointer;
+}
+
+#viewwrk .kmdropdown {
+    width: auto !important;
+    display: block;
+    position: absolute;
+    z-index: 9999;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+#viewwrk .kmdropdown p {
+    padding: 5px;
+    margin: 0;
+    text-align: left !important;
+}
+
+#viewwrk .kmdropdown p:hover {
+    background-color: lightblue;
+    cursor: pointer;
+}
+
+#viewwrk .hidingElem {
+  position: absolute;
+  background-color: white;
+  height: 14px;
+  width: 20px;
+  z-index: 9999;
+  top: 12px;
+  user-select: none;
+  outline: 0;
+}
+
+/***************** styling pagination *****************/
+.compact-theme .current {
+  background: #efefef; /* Old browsers */
+  background: -moz-linear-gradient(top, #7285ef 0%, #777fe2 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7285ef), color-stop(100%,#777fe2)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #7285ef 0%,#777fe2 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #7285ef 0%,#777fe2 100%); /* Opera11.10+ */
+  background: -ms-linear-gradient(top, #7285ef 0%,#777fe2 100%); /* IE10+ */
+  background: linear-gradient(top, #7285ef 0%,#777fe2 100%); /* W3C */
+  cursor: default;
+}
+
+.compact-theme .prev , .compact-theme .next {
+  background: #efefef; /* Old browsers */
+  background: -moz-linear-gradient(top, #3F51B5 0%, #3F51B5 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3F51B5), color-stop(100%,#3F51B5)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #3F51B5 0%,#3F51B5 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #3F51B5 0%,#3F51B5 100%); /* Opera11.10+ */
+  background: -ms-linear-gradient(top, #3F51B5 0%,#3F51B5 100%); /* IE10+ */
+  background: linear-gradient(top, #3F51B5 0%,#3F51B5 100%); /* W3C */
+  cursor: default;
+}
+
+.compact-theme a, .compact-theme span {
+  color: white;
+  background: #efefef; /* Old browsers */
+  background: -moz-linear-gradient(top, #3F51B5 0%, #3F51B5 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3F51B5), color-stop(100%,#3F51B5)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #3F51B5 0%,#3F51B5 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #3F51B5 0%,#3F51B5 100%); /* Opera11.10+ */
+  background: -ms-linear-gradient(top, #3F51B5 0%,#3F51B5 100%); /* IE10+ */
+  background: linear-gradient(top, #3F51B5 0%,#3F51B5 100%); /* W3C */
+}
+
+.compact-theme a:hover {
+  text-decoration: none;
+  background: #efefef; /* Old browsers */
+  background: -moz-linear-gradient(top, #949ed8  0%, #3F51B5 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#949ed8), color-stop(100%,#3F51B5)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #949ed8  0%,#3F51B5 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #949ed8  0%,#3F51B5 100%); /* Opera11.10+ */
+  background: -ms-linear-gradient(top, #949ed8  0%,#3F51B5 100%); /* IE10+ */
+  background: linear-gradient(top, #949ed8  0%,#3F51B5 100%); /* W3C */
+}
+
+.compact-theme .ellipse {
+  background: #3F51B5;
+  padding: 0 10px;
+  cursor: default;
+}
+
+/***************** loading Animation *****************/
+.loadingimage {
+  font-size: 30px;
+  text-align: center;
+  margin-top: 30vh;
+}
+
+/***************** context-menu *****************/
+.context-menu-list {
+  position: absolute;
+  z-index: 99 !important;
+} 
+
+/***************** TreeView elements *****************/
+
+.ebtree {
+  background-color: #ececec;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.ebtree a {
+  color: #3f51b5;
+  padding: 1px;
+  padding-left: 2px;
+  padding-right: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+.ebtree a:hover {
+  color: #1261f9;
+  text-decoration: underline;
+  cursor:pointer;
+}
+#viewtree {
+  border: 3px solid #d8d8d8;
+}
+
+.ebtree li.focus>a {
+  background-color: #b4cfff;
+  border: 1px solid #3f51b5
+}
+
+.ebtree ul li {
+  margin-bottom: 2px;
+}
+
+.ebtree ul li .fa {
+  cursor:pointer;
+}
+

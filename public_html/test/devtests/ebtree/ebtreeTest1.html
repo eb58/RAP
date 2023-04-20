@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body { background:#FAFAF0; margin: 5px 5px 5px 5px; }
+      * {font-family: roboto; color: black; font-size: 12px; }
+    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed" >    
+    <link rel="stylesheet" href="../../../vendor/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../../vendor/jQueryUI-1.11.0/jquery-ui.css">
+    <link rel="stylesheet" href="../../../vendor/eblib/ebtree.css">
+
+    <script src="../../../vendor/underscore-1.8.3/underscore.js"></script>
+    <script src="../../../vendor/jQuery-1.11.3/jquery.js"></script>
+    <script src="../../../vendor/jQueryUI-1.11.0/jquery-ui.js"></script>
+    <script src="../../../vendor/eblib/tinypubsub.js"></script>
+    <script src="../../../vendor/eblib/ebbind.js"></script>
+    <script src="../../../vendor/eblib/ebtree.js"></script>
+
+    <script src="../../../js/utils/utils.js"></script>
+
+    <script src="../../../js/view/viewflds.js"></script>
+
+    <script src="../../../js/data/codesTable.js"></script>
+    <script src="../../../js/data/generatedMasks.js"></script>
+    <script>
+      'use strict';
+      var treeItems = [
+        {
+          label: 'Labeltest',
+          dynamicSubitem: {
+            label: 'AAA ###1###',
+            inputFields: [{fldtype: 'Text', label: 'Bezeichnung     ', dataRapPath: 'Recht[###1###]', id: 'Bezeichnung###1###'}, ],
+            subitems: [{
+                label: '111',
+                dynamicSubitem: {
+                  label: 'BBB[###1###,###2###]',
+                  inputFields: [{fldtype: 'Text', label: 'Bezeichnung     ', dataRapPath: 'Recht1[###1###][###2###]   ', id: 'Bezeichnung###1######2###'}, ],
+                },
+              }, {
+                label: '222',
+                dynamicSubitem: {
+                  label: 'CCC[###1###,###2###]',
+                  inputFields: [{fldtype: 'Text', label: 'Bezeichnung     ', dataRapPath: 'Recht1[###1###][###2###]   ', id: 'Bezeichnung###1######2###'}, ],
+                },
+              }],
+          },
+        },
+      ];
+      var doOpenX = function doOpenX(ev) {
+        ev.stopPropagation();
+        var id = ev.target.parentNode.id
+        console.log('#################', id);
+        var item = tree.itemById(id);
+        if (item) {
+          $('#editParams').viewflds(null, item.inputFields || []);
+          tree.setFocus(id);
+        }
+      };
+      var tree;
+      $().ready(function () {
+        //$('#mainWork').height(window.innerHeight).split({limit: 30, position: '50%', orientation: 'vertical'});
+        var treeOpts = {
+          onClickItem: doOpenX
+        };
+        var treeData = $.extend(true, [], treeItems); // true -> deep !
+        tree = $('#tree1').ebtree(treeOpts, treeData);
+        $('#btnTEST1').on('click', function () {
+          treeData = $.extend(true, [], treeItems); // true -> deep !
+          tree = $('#tree1').ebtree(treeOpts, treeData);
+        })
+        $('#btnTEST2').on('click', function () {
+          treeData = utils.clone(esvMasks.TEST0);
+          tree = $('#tree1').ebtree(treeOpts, treeData);
+        })
+        $('#btnSave').on('click', function () {
+          localStorage.treeData = JSON.stringify(treeData, function (key, value) {
+            if (key === 'parent') {
+              return undefined;
+            }
+            return value;
+          }, 2);
+        })
+        $('#btnLoad').on('click', function () {
+          treeData = $.extend(true, [], JSON.parse(localStorage.treeData), utils.clone(esvMasks.TEST0));
+          tree = $('#tree1').ebtree(treeOpts, treeData);
+        })
+      });
+    </script>
+  </head>
+  <body>
+    <button id="btnTEST1">TEST</button>
+    <button id="btnTEST2">TEST</button>
+    <button id="btnSave">Save</button>
+    <button id="btnLoad">Load</button>
+    <div id="mainWork">
+      <div id='editParams'  style="overflow: auto; float:left; border:1px solid black; padding: 1px"></div>
+      <div id='tree1'       style="overflow: auto; float:left; border:1px solid black; padding: 1px"></div>
+    </div>
+  </body>
+</html>

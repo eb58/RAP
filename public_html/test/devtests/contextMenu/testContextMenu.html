@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TEST</title>
+    <link rel="stylesheet" href="../../../vendor/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../../vendor/jQuery-contextmenu/jquery.contextMenu.css">
+    <style>
+      #canvas1 { 
+        width: 200px;
+        height: 200px;
+        background-color: blue;
+      }
+      #canvas2 { 
+        width: 200px;
+        height: 200px;
+        background-color: red;
+      }
+    </style>
+
+    <script src="../../../vendor/underscore-1.8.3/underscore.js"></script>
+    <script src="../../../vendor/jQuery-1.11.3/jquery.js"></script>
+    <script src="../../../vendor/jQuery-contextmenu/jquery.contextMenu.js"></script>
+    <script src="../../../vendor/fabric.js/fabric.min.js"></script>
+    <script>
+      var f1 = function () {
+        console.log('f1');
+        $.contextMenu({
+          selector: '#canvases',
+          build: function (trigger, evt) {
+            return {
+              items: {
+                test1: {name: 'Test1', },
+                test2: {name: _.now(), },
+              },
+              callback: function (key, options) {
+                console.log('clicked: ' + key + ' on --- Options:', options, 'Trigger:', trigger, 'Event:', evt);
+              },
+            };
+          }
+        });
+      };
+      var f2 = function () {
+        console.log('f2');
+        $.contextMenu({
+          selector: '#canvases',
+          items: {
+            test1: {name: 'TestA', },
+            test2: {name: 'TestB', },
+          },
+          build: function (trigger, evt) {
+            return {
+              callback: function (key, options) {
+                console.log('clicked: ' + key + ' on --- Options:', options, 'Trigger:', trigger, 'Event:', evt);
+              },
+            };
+          }
+        });
+      };
+
+
+      $(document).ready(function () {
+        var fabcanvas1 = new fabric.Canvas('canvas1');
+        fabcanvas1.on('mouse:down', function (event) {
+          console.log('mouse:down');
+          f1();
+        });
+        var fabcanvas2 = new fabric.Canvas('canvas2');
+        fabcanvas2.on('mouse:down', function (event) {
+          console.log('mouse:down');
+          f2();
+        });
+        $('#canvases').on('click', function (evt) {
+          console.log('AAAAAAAAAAA', evt);
+        })
+      })
+
+    </script>
+  </head>
+
+  <body>
+    <div id="canvases">
+      <canvas id="canvas1"></canvas>
+      <canvas id="canvas2"></canvas>
+    </div>
+  </body>
+</html>

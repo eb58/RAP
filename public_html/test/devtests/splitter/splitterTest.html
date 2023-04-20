@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+  <head>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../vendor/jQueryUI-1.11.0/jquery-ui.css">
+    <style>
+      .wrap {
+        width: 100%;
+        border: 1px brown solid;
+      }
+      .resizable {
+        width: 50%;
+        height: 120px;
+        padding: 0.5em;
+        background-color: coral;
+        display: inline-block;
+      }
+      .resizable2 { background-color: lightblue;  }
+      .ui-resizable-e { cursor: e-resize; width: 6px; right: -5px; top: 0; bottom: 0; background-color: gray;
+      }
+    </style>
+    <script src="../../../vendor/underscore-1.8.3/underscore.js"></script>
+    <script src="../../../vendor/jQuery-1.11.3/jquery.js"></script>
+    <script src="../../../vendor/jQueryUI-1.11.0/jquery-ui.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".resizable1").resizable({
+          autoHide: true,
+          handles: 'e',
+          resize: function (e, ui) {
+            var parent = ui.element.parent();
+            var remainingSpace = parent.width() - ui.element.outerWidth();
+            var divTwo = ui.element.next();
+            var divTwoWidth = (remainingSpace - (divTwo.outerWidth() - divTwo.width())) / parent.width() * 100 + "%";
+            divTwo.width(divTwoWidth);
+          },
+          stop: function (e, ui) {
+            var parent = ui.element.parent();
+            ui.element.css({width: ui.element.width() / parent.width() * 100 + "%"});
+          }
+        });
+      });
+    </script>      
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="resizable resizable1" style="overflow: auto; padding: 10px"><img src="/images/hzpic.png"></div>
+      <div class="resizable resizable2" style="overflow: auto; padding: 10px"><img src="/images/hzpic.png"></div>
+    </div>
+  </body>
+</html>
